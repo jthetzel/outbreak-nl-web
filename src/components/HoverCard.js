@@ -1,6 +1,7 @@
 import React  from 'react'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card'
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 const styles = theme => ({
 
@@ -14,9 +15,9 @@ const HoverCard = (props) => {
     const number = item.value || 0
 
     return (
-      <li>
-        {outbreak} {number}
-      </li>
+      <ListItem key={outbreak} dense={true} >
+        <ListItemText primary={outbreak} secondary={`${number} reported`} />
+      </ListItem>
     )
   })
   
@@ -27,11 +28,10 @@ const HoverCard = (props) => {
   return (
     <Card>
       <CardHeader title={country} />
-        <ul>
-          {items}
-        </ul>
       <CardContent>
-        
+        <List>
+          {items}
+        </List>
       </CardContent>
     </Card>
   )

@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const TYPES = ['measles', 'mumps']
+const TYPES = ['measles', 'mumps', 'rubella', 'poliomyelitis', 'tetanus']
 const YEAR = '2016'
 const countries = require('./countries.json')
 

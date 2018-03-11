@@ -21,10 +21,13 @@ const HoverCardContainer = props => {
     return null
   }
 
-  const { properties: { country, measles, mumps }} = feature
+  const { properties: { country, measles, mumps, rubella, poliomyelitis, tetanus }} = feature
   const outbreaks = [
     { name: 'measels', value: measles },
     { name: 'mumps', value: mumps },
+    { name: 'rubella', value: rubella },
+    { name: 'polimyelitis', value: poliomyelitis },
+    { name: 'tetanus', value: tetanus },
     ]
   
   return (
