@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import HoverCardContainer from './HoverCardContainer'
+import DrawerContainer from './DrawerContainer'
 import logo from '../logo.svg'
 import './Root.css'
 import OutbreakActions from '../redux/outbreakRedux'
@@ -13,9 +14,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App">       
         <HoverCardContainer />
         <Map />
+        <DrawerContainer />
       </div>
     );
   }

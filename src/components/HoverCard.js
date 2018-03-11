@@ -4,7 +4,9 @@ import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
 const styles = theme => ({
-
+  paper: {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  }
 })
 
 const HoverCard = (props) => {

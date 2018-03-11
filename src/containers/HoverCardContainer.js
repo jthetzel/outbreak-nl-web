@@ -11,6 +11,9 @@ const styles = theme => ({
     top: '10px',
     right: '10px',
     zIndex: 5000
+  },
+  paper: {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
   }
 })
 
