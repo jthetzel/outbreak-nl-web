@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Layer, Source } from 'react-mapbox-gl'
 import HoverActions from '../redux/hoverRedux'
+import data from '../outbreakCountries.geojson'
+
+console.log(Object.keys(data))
 
 const id = 'Countries'
 // const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
 const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+
+
 
 export class Countries extends Component {
   static contextTypes = {
@@ -64,14 +69,31 @@ export class Countries extends Component {
   render () {
     const source = {
       type: 'geojson',
-      data: url
+      data: data
       
     }
 
     return (
       <div>
         <Source id={id} geoJsonSource={source} />
-        <Layer type='fill' sourceId={id} id={id} paint={{ 'fill-color': 'red', 'fill-opacity': 0.0 }} />
+        <Layer
+          type='fill'
+          sourceId={id}
+          id={id}
+          paint={{
+            'fill-color': 'red',
+            'fill-opacity': 0.4,
+            'fill-color': {
+              property: 'measles',
+              type: 'exponential',
+              stops: [
+                [0, 'blue'],
+                [1000, 'yellow'],
+                [10000, 'red']
+              ]
+            }
+          }}
+          />
         <Layer
           type='line'
           sourceId={id}
