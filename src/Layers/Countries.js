@@ -54,7 +54,7 @@ export class Countries extends Component {
     if (nextProps.hoverId !== this.props.hoverId) {
       return false
     } else if (nextProps.vaccines !== this.props.vaccines) {
-      return false
+      return true
     } else if (nextProps === this.props) {
       return false
     }
@@ -64,6 +64,10 @@ export class Countries extends Component {
   componentWillReceiveProps (props) {
     const { hoverId, vaccines } = this.props
     const { map } = this.context
+    
+    const outbreaks = OUTBREAKS.filter(item => vaccines.indexOf(item) === -1)
+    console.log(vaccines)
+    console.log(outbreaks)
 
     if (props.hoverId !== hoverId) {
       const filterBase = ['in', 'ADMIN']
@@ -72,23 +76,32 @@ export class Countries extends Component {
       map.setFilter(`${id}-hovered`, filter)
     }
 
-    if (props.vaccines !== vaccines) {
-      const filterBase = ['in', 'ADMIN']
-      const filter = props.hoverId ? filterBase.concat(props.hoverId) : filterBase
-
-      map.setFilter(`${id}-hovered`, filter)
-    }
+    // if (props.vaccines !== vaccines) {
+    //   const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
+    //   console.log('update paint')
+    //   console.log(properties)
+    //   const fillColor = [
+    //     'interpolate',
+    //     ['linear'],
+    //     ['+', ...properties],
+    //     0, GREEN,
+    //     300, YELLOW,
+    //     10000, RED
+    //   ]
+    //   map.setPaintProperty(id, 'fill-color', fillColor)
+    //
+    // }
     
   }
 
   render () {
     const { vaccines } = this.props
-    console.log(vaccines, OUTBREAKS)
+    // console.log(vaccines, OUTBREAKS)
     const outbreaks = OUTBREAKS.filter(item => vaccines.indexOf(item) === -1)
-    console.log(outbreaks)
+    // console.log(outbreaks)
 
     const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
-    console.log(properties)
+    // console.log(properties)
     
     const source = {
       type: 'geojson',
@@ -109,9 +122,9 @@ export class Countries extends Component {
             'fill-color': [
               'interpolate',
               ['linear'],
-              ['+', ['to-number', ['get', 'measles'], 0], ['to-number', ['get', 'mumps'], 0]],
+              ['+', ...properties],
               0, GREEN,
-              1000, YELLOW,
+              300, YELLOW,
               10000, RED
             ]
           }}

@@ -29,7 +29,7 @@ const HoverCardContainer = props => {
     { name: 'measles', value: measles },
     { name: 'mumps', value: mumps },
     { name: 'rubella', value: rubella },
-    { name: 'polimyelitis', value: poliomyelitis },
+    { name: 'poliomyelitis', value: poliomyelitis },
     { name: 'tetanus', value: tetanus },
     ]
   
