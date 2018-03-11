@@ -10,5 +10,6 @@ export const rootEpic = combineEpics(
 export const rootReducer = combineReducers({
   // firebase: firebaseStateReducer,
   outbreak: require('./outbreakRedux').reducer,
-  hover: require('./hoverRedux').reducer
+  hover: require('./hoverRedux').reducer,
+  vaccine: require('./vaccineRedux').reducer
 })

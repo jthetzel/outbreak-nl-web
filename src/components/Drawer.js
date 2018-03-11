@@ -7,7 +7,7 @@ import VaccineList from './VaccineList'
 
 const styles = theme => ({
   paper: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
   }
 })
 

@@ -19,7 +19,7 @@ const styles = theme => ({
 
 const HoverCardContainer = props => {
   const { classes, feature } = props
-  console.log(feature)
+
   if (!feature) {
     return null
   }
