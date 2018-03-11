@@ -5,8 +5,6 @@ import { Layer, Source } from 'react-mapbox-gl'
 import HoverActions from '../redux/hoverRedux'
 import data from '../outbreakCountries.geojson'
 
-console.log(Object.keys(data))
-
 const id = 'Countries'
 // const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
 const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
@@ -48,6 +46,8 @@ export class Countries extends Component {
   shouldComponentUpdate (nextProps) {
     if (nextProps.hoverId !== this.props.hoverId) {
       return false
+    } else if (nextProps.vaccines !== this.props.vaccines) {
+      return false
     } else if (nextProps === this.props) {
       return false
     }
@@ -55,7 +55,7 @@ export class Countries extends Component {
   }
 
   componentWillReceiveProps (props) {
-    const { hoverId } = this.props
+    const { hoverId, vaccines } = this.props
     const { map } = this.context
 
     if (props.hoverId !== hoverId) {
@@ -64,6 +64,14 @@ export class Countries extends Component {
 
       map.setFilter(`${id}-hovered`, filter)
     }
+
+    if (props.vaccines !== vaccines) {
+      const filterBase = ['in', 'ADMIN']
+      const filter = props.hoverId ? filterBase.concat(props.hoverId) : filterBase
+
+      map.setFilter(`${id}-hovered`, filter)
+    }
+    
   }
 
   render () {
@@ -108,7 +116,8 @@ export class Countries extends Component {
 
 const mapStateToProps = state => {
   return {
-    hoverId: state.hover.id
+    hoverId: state.hover.id,
+    vaccines: state.vaccine.vaccines
   }
 }
 
