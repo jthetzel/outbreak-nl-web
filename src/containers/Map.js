@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
-import { CENTER } from '../config'
+import { CENTER, ZOOM } from '../config'
 import Countries from '../Layers/Countries'
 
 const Map = ReactMapboxGl({
@@ -19,6 +19,7 @@ class MapboxMap extends Component {
       <Map
         onClick={this.handleClick}
         center={CENTER}
+        zoom={ZOOM}
         style="mapbox://styles/mapbox/streets-v9"
         containerStyle={{
           height: "100vh",
