@@ -11,11 +11,7 @@ const Map = ReactMapboxGl({
 
 class MapboxMap extends Component {
   handleClick = (map, event) => {
-    const { actions } = this.props
-    const { lng, lat } = event.lngLat
-    const features = map.queryRenderedFeatures(event.point)
-
-    console.log(features)
+   
   }
   
   render () {

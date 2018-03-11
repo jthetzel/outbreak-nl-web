@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Provider } from 'react-redux'
+import configureStore from './redux/configureStore'
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+// import injectTapEventPlugin from 'react-tap-event-plugin'
+// import ReactGA from 'react-ga'
+import Root from './containers/Root'
+
+// ReactGA.initialize('UA-102217061-1')
+// ReactGA.pageview('/')
+
+const store = configureStore()
+// work around for material-ui tap events
+// injectTapEventPlugin()
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    )
   }
 }
 
-export default App;
+export default App
