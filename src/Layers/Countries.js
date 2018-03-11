@@ -100,7 +100,7 @@ export class Countries extends Component {
             'fill-color': [
               'interpolate',
               ['linear'],
-              ['get', 'total'],
+              ['+', ['to-number', ['get', 'measles'], 0], ['to-number', ['get', 'mumps'], 0]],
               0, GREEN,
               1000, YELLOW,
               10000, RED
