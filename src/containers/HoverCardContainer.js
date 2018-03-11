@@ -21,11 +21,15 @@ const HoverCardContainer = props => {
     return null
   }
 
-  const { properties: { country }} = feature
+  const { properties: { country, measles, mumps }} = feature
+  const outbreaks = [
+    { name: 'measels', value: measles },
+    { name: 'mumps', value: mumps },
+    ]
   
   return (
     <div className={classes.container} >
-      <HoverCard country={country} />
+      <HoverCard country={country} outbreaks={outbreaks} />
     </div>
   )
 }

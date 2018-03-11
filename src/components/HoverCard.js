@@ -7,8 +7,19 @@ const styles = theme => ({
 })
 
 const HoverCard = (props) => {
-  const { classes, country } = props
+  const { classes, country, outbreaks } = props
 
+  const items = outbreaks.map(item => {
+    const outbreak = item.name
+    const number = item.value || 0
+
+    return (
+      <li>
+        {outbreak} {number}
+      </li>
+    )
+  })
+  
   if (!country) {
     return null
   }
@@ -16,6 +27,12 @@ const HoverCard = (props) => {
   return (
     <Card>
       <CardHeader title={country} />
+        <ul>
+          {items}
+        </ul>
+      <CardContent>
+        
+      </CardContent>
     </Card>
   )
 }
