@@ -5,6 +5,7 @@ import { Layer, Source } from 'react-mapbox-gl'
 import HoverActions from '../redux/hoverRedux'
 import data from '../outbreakCountries.geojson'
 import { red, yellow, green, blue } from 'material-ui/colors'
+import { OUTBREAKS } from '../config'
 
 export const RED = red[500]
 export const YELLOW = yellow[500]
@@ -81,6 +82,14 @@ export class Countries extends Component {
   }
 
   render () {
+    const { vaccines } = this.props
+    console.log(vaccines, OUTBREAKS)
+    const outbreaks = OUTBREAKS.filter(item => vaccines.indexOf(item) === -1)
+    console.log(outbreaks)
+
+    const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
+    console.log(properties)
+    
     const source = {
       type: 'geojson',
       data: data
@@ -104,16 +113,7 @@ export class Countries extends Component {
               0, GREEN,
               1000, YELLOW,
               10000, RED
-            ],
-            // 'fill-color': {
-            //   property: 'measles',
-            //   type: 'exponential',
-            //   stops: [
-            //     [0, 'blue'],
-            //     [1000, 'yellow'],
-            //     [10000, 'red']
-            //   ]
-            // }
+            ]
           }}
           />
         <Layer
