@@ -4,6 +4,12 @@ import { connect } from 'react-redux'
 import { Layer, Source } from 'react-mapbox-gl'
 import HoverActions from '../redux/hoverRedux'
 import data from '../outbreakCountries.geojson'
+import { red, yellow, green, blue } from 'material-ui/colors'
+
+export const RED = red[500]
+export const YELLOW = yellow[500]
+export const GREEN = green[500]
+export const BLUE = blue[500]
 
 const id = 'Countries'
 // const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
@@ -91,15 +97,23 @@ export class Countries extends Component {
           paint={{
             'fill-color': 'red',
             'fill-opacity': 0.4,
-            'fill-color': {
-              property: 'measles',
-              type: 'exponential',
-              stops: [
-                [0, 'blue'],
-                [1000, 'yellow'],
-                [10000, 'red']
-              ]
-            }
+            'fill-color': [
+              'interpolate',
+              ['linear'],
+              ['get', 'total'],
+              0, GREEN,
+              1000, YELLOW,
+              10000, RED
+            ],
+            // 'fill-color': {
+            //   property: 'measles',
+            //   type: 'exponential',
+            //   stops: [
+            //     [0, 'blue'],
+            //     [1000, 'yellow'],
+            //     [10000, 'red']
+            //   ]
+            // }
           }}
           />
         <Layer
@@ -128,3 +142,14 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Countries)
+/*
+  'fill-color': [
+  'interpolate',
+  ['linear'],
+  ['to-number', ['get', 'Name']],
+  -2, 'red',
+  0, RIVER_CLASS_COLORS[0],
+  1500, RIVER_CLASS_COLORS[1],
+  3000, RIVER_CLASS_COLORS[2]
+  ]
+*/
