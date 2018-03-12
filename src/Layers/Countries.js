@@ -13,8 +13,10 @@ export const GREEN = green[500]
 export const BLUE = blue[500]
 
 const id = 'Countries'
+const sourceLayer = 'outbreakCountries'
 // const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
-const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+// const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+const url = 'https://coresight-vector.s3-us-west-2.amazonaws.com/outbreakCountries/{z}/{x}/{y}'
 
 
 
@@ -104,17 +106,18 @@ export class Countries extends Component {
     // console.log(properties)
     
     const source = {
-      type: 'geojson',
-      data: data
-      
+      type: 'vector',
+      tiles: [url],
+      tileSize: 512
     }
 
     return (
       <div>
-        <Source id={id} geoJsonSource={source} />
+        <Source id={id} tileJsonSource={source} />
         <Layer
           type='fill'
           sourceId={id}
+          sourceLayer={sourceLayer}
           id={id}
           paint={{
             'fill-color': 'red',
@@ -132,6 +135,7 @@ export class Countries extends Component {
         <Layer
           type='line'
           sourceId={id}
+          sourceLayer={sourceLayer}
           id={`${id}-hovered`}
           paint={{ 'line-color': 'blue' }}
           filter={['in', 'ADMIN'].concat('Malaysia')}
