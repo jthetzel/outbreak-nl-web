@@ -13,10 +13,10 @@ export const GREEN = green[500]
 export const BLUE = blue[500]
 
 const id = 'Countries'
+const sourceLayer = 'outbreakCountries'
 // const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
-const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-
-
+// const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+const url = 'https://coresight-vector.s3-us-west-2.amazonaws.com/outbreakCountries/{z}/{x}/{y}'
 
 export class Countries extends Component {
   static contextTypes = {
@@ -54,67 +54,59 @@ export class Countries extends Component {
     if (nextProps.hoverId !== this.props.hoverId) {
       return false
     } else if (nextProps.vaccines !== this.props.vaccines) {
-      return true
+      return false
     } else if (nextProps === this.props) {
       return false
     }
     return true
   }
 
-  componentWillReceiveProps (props) {
+  componentWillReceiveProps (nextProps) {
     const { hoverId, vaccines } = this.props
     const { map } = this.context
-    
-    const outbreaks = OUTBREAKS.filter(item => vaccines.indexOf(item) === -1)
-    console.log(vaccines)
-    console.log(outbreaks)
 
-    if (props.hoverId !== hoverId) {
+    if (nextProps.hoverId !== hoverId) {
       const filterBase = ['in', 'ADMIN']
-      const filter = props.hoverId ? filterBase.concat(props.hoverId) : filterBase
+      const filter = nextProps.hoverId ? filterBase.concat(nextProps.hoverId) : filterBase
 
       map.setFilter(`${id}-hovered`, filter)
     }
 
-    // if (props.vaccines !== vaccines) {
-    //   const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
-    //   console.log('update paint')
-    //   console.log(properties)
-    //   const fillColor = [
-    //     'interpolate',
-    //     ['linear'],
-    //     ['+', ...properties],
-    //     0, GREEN,
-    //     300, YELLOW,
-    //     10000, RED
-    //   ]
-    //   map.setPaintProperty(id, 'fill-color', fillColor)
-    //
-    // }
+    if (nextProps.vaccines !== vaccines) {
+      const outbreaks = OUTBREAKS.filter(item => nextProps.vaccines.indexOf(item) === -1)
+      const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
+      const fillColor = [
+        'interpolate',
+        ['linear'],
+        ['+', ...properties],
+        0, GREEN,
+        300, YELLOW,
+        10000, RED
+      ]
+      map.setPaintProperty(id, 'fill-color', fillColor)
+    
+    }
     
   }
 
   render () {
     const { vaccines } = this.props
-    // console.log(vaccines, OUTBREAKS)
     const outbreaks = OUTBREAKS.filter(item => vaccines.indexOf(item) === -1)
-    // console.log(outbreaks)
-
     const properties = outbreaks.map(item => ['to-number', ['get', item], 0])
-    // console.log(properties)
     
     const source = {
-      type: 'geojson',
-      data: data
-      
+      type: 'vector',
+      tiles: [url],
+      tileSize: 512
     }
 
     return (
       <div>
-        <Source id={id} geoJsonSource={source} />
+        <Source id={id} tileJsonSource={source} />
         <Layer
           type='fill'
           sourceId={id}
+          sourceLayer={sourceLayer}
           id={id}
           paint={{
             'fill-color': 'red',
@@ -132,9 +124,10 @@ export class Countries extends Component {
         <Layer
           type='line'
           sourceId={id}
+          sourceLayer={sourceLayer}
           id={`${id}-hovered`}
           paint={{ 'line-color': 'blue' }}
-          filter={['in', 'ADMIN'].concat('Malaysia')}
+          filter={['in', 'ADMIN']}
           />
       </div>
     )
@@ -155,14 +148,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Countries)
-/*
-  'fill-color': [
-  'interpolate',
-  ['linear'],
-  ['to-number', ['get', 'Name']],
-  -2, 'red',
-  0, RIVER_CLASS_COLORS[0],
-  1500, RIVER_CLASS_COLORS[1],
-  3000, RIVER_CLASS_COLORS[2]
-  ]
-*/
