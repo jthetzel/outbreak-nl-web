@@ -18,8 +18,6 @@ const sourceLayer = 'outbreakCountries'
 // const url = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
 const url = 'https://coresight-vector.s3-us-west-2.amazonaws.com/outbreakCountries/{z}/{x}/{y}'
 
-
-
 export class Countries extends Component {
   static contextTypes = {
     map: PropTypes.object
@@ -150,14 +148,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Countries)
-/*
-  'fill-color': [
-  'interpolate',
-  ['linear'],
-  ['to-number', ['get', 'Name']],
-  -2, 'red',
-  0, RIVER_CLASS_COLORS[0],
-  1500, RIVER_CLASS_COLORS[1],
-  3000, RIVER_CLASS_COLORS[2]
-  ]
-*/
