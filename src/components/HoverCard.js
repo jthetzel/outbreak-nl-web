@@ -1,6 +1,6 @@
 import React  from 'react'
 import { withStyles } from 'material-ui/styles'
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card'
+import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
 const styles = theme => ({
@@ -10,7 +10,7 @@ const styles = theme => ({
 })
 
 const HoverCard = (props) => {
-  const { classes, country, outbreaks } = props
+  const { country, outbreaks } = props
 
   const items = outbreaks.map(item => {
     const outbreak = item.name

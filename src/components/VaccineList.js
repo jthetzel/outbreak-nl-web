@@ -1,13 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import {
-  FormLabel,
-  FormControl,
-  FormGroup,
-  FormControlLabel,
-  FormHelperText,
-} from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox'
 import { OUTBREAKS } from '../config'
 import VaccineActions from '../redux/vaccineRedux'
@@ -20,7 +13,7 @@ class VaccineList extends PureComponent {
   }
 
   render () {
-  const { vaccines, vaccineToggled } = this.props
+  const { vaccines } = this.props
   
   const items = OUTBREAKS.map(item => {
     const checked = vaccines.indexOf(item) === -1 ? false : true

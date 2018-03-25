@@ -21,13 +21,10 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const outbreakUpdateRequested = (state, action) => {
-  console.log('requesting')
   return state.merge({ fetching: true })
 }
 
 export const outbreakUpdateFulfilled = (state, { payload }) => {
-  console.log(payload)
-  console.log('fulfilled')
   return state.merge({ fetching: false })
 }
 

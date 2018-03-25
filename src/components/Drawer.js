@@ -1,7 +1,6 @@
 import  React from 'react'
 import { withStyles } from 'material-ui/styles'
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card'
-import Drawer from 'material-ui/Drawer'
+import Card, { CardContent } from 'material-ui/Card'
 import VaccineList from './VaccineList'
 
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Layer, Source } from 'react-mapbox-gl'
 import HoverActions from '../redux/hoverRedux'
-import data from '../outbreakCountries.geojson'
 import { red, yellow, green, blue } from 'material-ui/colors'
 import { OUTBREAKS } from '../config'
 
@@ -36,7 +35,6 @@ export class Countries extends Component {
 
   handleClick = event => {
     const { map } = this.context
-    const { lng, lat } = event.lngLat
     const features = map.queryRenderedFeatures(event.point, { layers: [id] })
 
     console.log(features)
@@ -44,7 +42,6 @@ export class Countries extends Component {
 
   handleHover = event => {
     const { map } = this.context
-    const { lng, lat } = event.lngLat
     const features = map.queryRenderedFeatures(event.point, { layers: [id] })
 
     this.props.hovered(features[0])
@@ -109,7 +106,6 @@ export class Countries extends Component {
           sourceLayer={sourceLayer}
           id={id}
           paint={{
-            'fill-color': 'red',
             'fill-opacity': 0.4,
             'fill-color': [
               'interpolate',

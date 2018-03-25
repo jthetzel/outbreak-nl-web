@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import HoverCard from '../components/HoverCard'
 
-console.log(HoverCard)
-
 const styles = theme => ({
   container: {
     position: 'absolute',
