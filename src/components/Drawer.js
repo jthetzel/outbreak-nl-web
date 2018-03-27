@@ -5,7 +5,6 @@ import Card, { CardContent, CardHeader, CardMedia } from 'material-ui/Card'
 import VaccineList from './VaccineList'
 import Logo from '../assets/logo.png'
 
-console.log(Logo)
 const styles = theme => ({
   paper: {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',

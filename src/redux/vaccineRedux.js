@@ -21,13 +21,9 @@ export const INITIAL_STATE = Immutable({
 export const vaccineToggled = (state, { vaccine }) => {
   const prevVaccines = state.vaccines
   const index = prevVaccines.indexOf(vaccine)
-  console.log(prevVaccines)
-  console.log(vaccine)
-  console.log(index)
   const nextVaccines = (index === -1)
     ? prevVaccines.concat(vaccine)
         : prevVaccines.filter(item => item !== vaccine)
-  console.log(nextVaccines)
   return state.merge({ vaccines: nextVaccines })
 }
 
