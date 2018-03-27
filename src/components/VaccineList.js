@@ -28,7 +28,7 @@ class VaccineList extends PureComponent {
     return (
       <ListItem dense={true} key={item} className={classes.item}>
         <Checkbox checked={checked} onChange={() => this.handleClick(item)} />
-          <ListItemText primary={<Typography variant={'caption'}>{item}</Typography>} textDense/>
+          <ListItemText primary={<Typography variant={'caption'}>{item}</Typography>} />
       </ListItem>
     )
   })

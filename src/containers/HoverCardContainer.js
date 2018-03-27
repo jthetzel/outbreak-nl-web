@@ -16,7 +16,7 @@ const styles = theme => ({
 })
 
 const HoverCardContainer = props => {
-  const { classes, feature } = props
+  const { classes, feature, vaccines } = props
 
   if (!feature) {
     return null
@@ -30,17 +30,20 @@ const HoverCardContainer = props => {
     { name: 'poliomyelitis', value: poliomyelitis },
     { name: 'tetanus', value: tetanus },
     ]
+
+  const unprotectedOutbreaks = outbreaks.filter(outbreak => vaccines.indexOf(outbreak.name) === -1)
   
   return (
     <div className={classes.container} >
-      <HoverCard country={country} outbreaks={outbreaks} />
+      <HoverCard country={country} outbreaks={unprotectedOutbreaks} />
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    feature: state.hover.feature
+    feature: state.hover.feature,
+    vaccines: state.vaccine.vaccines
   }
 }
                    

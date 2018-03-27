@@ -1,5 +1,6 @@
 import React  from 'react'
 import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
 import Card, { CardHeader, CardContent } from 'material-ui/Card'
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
@@ -29,7 +30,7 @@ const HoverCard = (props) => {
   
   return (
     <Card>
-      <CardHeader title={country} />
+      <CardHeader subheader={country} style={{paddingBottom: 0}} />
       <CardContent>
         <List>
           {items}
