@@ -18,7 +18,7 @@ const HoverCard = (props) => {
 
     return (
       <ListItem key={outbreak} dense={true} >
-        <ListItemText primary={outbreak} secondary={`${number} reported`} />
+        <ListItemText primary={outbreak} secondary={`${number.toLocaleString()} reported`} />
       </ListItem>
     )
   })
